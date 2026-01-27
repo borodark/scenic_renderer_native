@@ -1,0 +1,2 @@
+add_executable(scenic_standalone main.c)
+target_link_libraries(scenic_standalone PRIVATE scenic_platform_glfw)
