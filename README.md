@@ -26,6 +26,24 @@ cmake ..
 make
 ```
 
+### iOS Build (Metal)
+
+Use an iOS toolchain file (example: `ios.toolchain.cmake`) and enable the iOS platform backend:
+
+```bash
+mkdir build-ios && cd build-ios
+cmake .. \
+  -DCMAKE_SYSTEM_NAME=iOS \
+  -DCMAKE_TOOLCHAIN_FILE=/path/to/ios.toolchain.cmake \
+  -DSCENIC_BUILD_IOS=ON \
+  -DSCENIC_BUILD_GLFW=OFF \
+  -DSCENIC_BUILD_EXAMPLES=OFF \
+  -DSCENIC_BUILD_TESTS=OFF
+make
+```
+
+This builds the static renderer library and `scenic_platform_ios` with Metal/QuartzCore/UIKit.
+
 ### Build Options
 
 - `SCENIC_BUILD_SHARED` - Build shared library (default: ON)

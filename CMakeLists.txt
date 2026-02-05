@@ -9,6 +9,7 @@ option(SCENIC_BUILD_SHARED "Build shared library" ON)
 option(SCENIC_BUILD_STATIC "Build static library" ON)
 option(SCENIC_BUILD_GLFW "Build GLFW platform backend" ON)
 option(SCENIC_BUILD_ANDROID "Build Android platform backend" OFF)
+option(SCENIC_BUILD_IOS "Build iOS platform backend" OFF)
 option(SCENIC_BUILD_EXAMPLES "Build example programs" ON)
 option(SCENIC_BUILD_TESTS "Build tests" ON)
 
@@ -16,6 +17,13 @@ option(SCENIC_BUILD_TESTS "Build tests" ON)
 if(ANDROID)
     set(SCENIC_BUILD_GLFW OFF)
     set(SCENIC_BUILD_ANDROID ON)
+endif()
+
+# iOS platform build (Metal backend placeholder)
+if(APPLE AND CMAKE_SYSTEM_NAME STREQUAL "iOS")
+    set(SCENIC_BUILD_GLFW OFF)
+    set(SCENIC_BUILD_ANDROID OFF)
+    set(SCENIC_BUILD_IOS ON)
 endif()
 
 # Core source files (platform-independent)
@@ -109,6 +117,26 @@ endif()
 # Android Platform backend
 if(SCENIC_BUILD_ANDROID)
     add_subdirectory(src/platform/android)
+endif()
+
+# iOS Platform backend
+if(SCENIC_BUILD_IOS)
+    add_library(scenic_platform_ios STATIC src/platform/ios/platform_ios.mm)
+    target_include_directories(scenic_platform_ios PUBLIC ${SCENIC_INCLUDES})
+    target_compile_definitions(scenic_platform_ios PRIVATE SCENIC_PLATFORM_IOS)
+    target_link_libraries(scenic_platform_ios
+        PUBLIC
+            "-framework Metal"
+            "-framework QuartzCore"
+            "-framework UIKit"
+            "-framework Foundation"
+    )
+
+    if(SCENIC_BUILD_STATIC)
+        target_link_libraries(scenic_platform_ios PUBLIC scenic_renderer_static)
+    else()
+        target_link_libraries(scenic_platform_ios PUBLIC scenic_renderer_shared)
+    endif()
 endif()
 
 # Examples

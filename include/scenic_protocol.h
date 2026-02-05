@@ -15,28 +15,30 @@
 #define SCENIC_MSG_HEADER_SIZE 5
 
 /* Commands (driver -> renderer) */
+/* Values from scenic_driver_local (canonical source) */
 #define SCENIC_CMD_PUT_SCRIPT    0x01
 #define SCENIC_CMD_DEL_SCRIPT    0x02
 #define SCENIC_CMD_RESET         0x03
-#define SCENIC_CMD_CLEAR_COLOR   0x04
-#define SCENIC_CMD_PUT_FONT      0x05
-#define SCENIC_CMD_PUT_IMAGE     0x06
-#define SCENIC_CMD_RENDER        0x07
-#define SCENIC_CMD_GLOBAL_TX     0x08
-#define SCENIC_CMD_CURSOR_TX     0x09
+#define SCENIC_CMD_GLOBAL_TX     0x04
+#define SCENIC_CMD_CURSOR_TX     0x05
+#define SCENIC_CMD_RENDER        0x06
+#define SCENIC_CMD_CLEAR_COLOR   0x08
 #define SCENIC_CMD_REQUEST_INPUT 0x0A
 #define SCENIC_CMD_QUIT          0x20
+#define SCENIC_CMD_PUT_FONT      0x40
+#define SCENIC_CMD_PUT_IMAGE     0x41
 
 /* Events (renderer -> driver) */
-#define SCENIC_EVT_TOUCH         0x01
-#define SCENIC_EVT_KEY           0x02
-#define SCENIC_EVT_RESHAPE       0x03
-#define SCENIC_EVT_CODEPOINT     0x04
-#define SCENIC_EVT_CURSOR_POS    0x05
-#define SCENIC_EVT_MOUSE_BUTTON  0x06
-#define SCENIC_EVT_SCROLL        0x07
-#define SCENIC_EVT_CURSOR_ENTER  0x08
-#define SCENIC_EVT_READY         0x10
+/* Values from scenic_driver_local (canonical source) */
+#define SCENIC_EVT_RESHAPE       0x05
+#define SCENIC_EVT_READY         0x06
+#define SCENIC_EVT_TOUCH         0x08
+#define SCENIC_EVT_KEY           0x0A
+#define SCENIC_EVT_CODEPOINT     0x0B
+#define SCENIC_EVT_CURSOR_POS    0x0C
+#define SCENIC_EVT_MOUSE_BUTTON  0x0D
+#define SCENIC_EVT_SCROLL        0x0E
+#define SCENIC_EVT_CURSOR_ENTER  0x0F
 #define SCENIC_EVT_LOG_INFO      0xA0
 #define SCENIC_EVT_LOG_WARN      0xA1
 #define SCENIC_EVT_LOG_ERROR     0xA2
