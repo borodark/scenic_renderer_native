@@ -86,10 +86,14 @@ make
 Run the GLFW standalone example:
 
 ```bash
-./build/examples/glfw_standalone/scenic_standalone --port 4000
+./build/examples/glfw_standalone/scenic_standalone -p 4000
+# Or with Unix socket:
+./build/examples/glfw_standalone/scenic_standalone -s /tmp/scenic.sock
+# See all options:
+./build/examples/glfw_standalone/scenic_standalone --help
 ```
 
-Then connect a Scenic application using `ScenicDriverRemote` with TCP transport.
+Then connect a Scenic application using `ScenicDriverRemote` with TCP or Unix socket transport.
 
 ### As a Library
 
